@@ -161,10 +161,10 @@
 					let html='';
 					for(var i=0; i<data.datos.length; i++){
 						html+=
-						'<div class="col-md-3 ">'+
+						'<div class="col-md-3 py-5">'+
 							'<a href="venta_address.php?p='+data.datos[i].codpro+'">'+
 							'<div class="card" >'+
-								'<img class="card-img-top " src="images/productos/'+data.datos[i].rutimapro+'" >'+
+								'<img class="card-img-top img-fluid" src="images/productos/'+data.datos[i].rutimapro+'" >'+
 								'<div class="card-body">'+
 									'<h4 class="card-title">'+data.datos[i].nompro+'</h4>'+
 									'<p class="card-text">'+data.datos[i].despro+'</p>'+

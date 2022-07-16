@@ -22,19 +22,27 @@
 	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 
 
-    <div class="container" >
-		<div class="row">
-            <div class="col-md-6">
-                <img id="idimg" src="images/productos/1.jpg" alt="">
+    <div class="container p-5 mt-5" >
+		<div class="row d-flex align-items-center justify-content-around flex-column-md">
+            <div class="col-md-5 mb-3 mb-lg-0">
+                <img id="idimg" class="img-fluid shadow" src="images/productos/1.jpg" alt="">
             </div>
             <div class="col-md-6">
-                <h2 id="idtitle">NOMBRE PRINCIPAL</h2>
-				<h1 id="idprice">S/. 35.<span>99</span></h1>
-				<h3 id="iddescription">Descripcion del producto</h3>
-                <button class="btn btn-primary"  onclick="iniciar_compra()" type="button">Comprar</button>
+				<div class="card my-lg-0 shadow my-sm-3" style="max-width: 100%;">
+					<div class="card-body text-center p-2 p-md-3 p-lg-4">
+						<img src="images/industria/industry_image.svg" class="img-fluid " alt="">
+						<div class="card-header text-center bg-white py-4"><img src="images/Logito.png" class="img-fluid" alt=""></div>
+						<h2 id="idtitle">NOMBRE PRINCIPAL</h2>
+						<h1 class="text-warning " id="idprice">S/. 35.<span>99</span></h1>
+						<p class="card-text" id="iddescription">Descripcion del producto</p>
+						<div class="d-flex align-items-center justify-content-center">
+							<button class="btn btn-secondary btn-lg"  onclick="iniciar_compra()" type="button">Comprar</button>
+						</div>
+					</div>
+				</div>
             </div>
 		</div>
-    
+	
 	</div>
    
 
