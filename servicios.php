@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+ session_start();
 
+?>
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,9 +42,18 @@
 					</div>
 				</div>
 				<div class="col-sm-3 text-right align-self-center ingreso">
+					<?php
+					if (isset($_SESSION['codusu'])){
+					
+						echo '<a href="#" class="text-white"><i class="bi bi-person-circle"> </i>'.$_SESSION['nomusu'].'</a>';
+					}else{
+					?>
 					<div class="mx-auto d-block contact-nav contact">
-						<a href="#" class="text-white"><i class="bi bi-person-circle"> </i>Iniciar sesión</a>
+						<a href="#" class="text-white"><i class="bi bi-person-circle"> </i></a>
 					</div>
+					<?php
+					}
+					?>
 				</div>
 			</div>
 		</div>

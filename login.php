@@ -1,3 +1,7 @@
+<?php
+ session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,9 +41,18 @@
 					</div>
 				</div>
 				<div class="col-sm-3 text-right align-self-center ingreso">
+					<?php
+					if (isset($_SESSION['codusu'])){
+					
+						echo '<a href="#" class="text-white"><i class="bi bi-person-circle"> </i>'.$_SESSION['nomusu'].'</a>';
+					}else{
+					?>
 					<div class="mx-auto d-block contact-nav contact">
-                        <a href="login.php" class="text-white"><i class="bi bi-bi-person-circle"></i>Iniciar sesión</a>
+						<a href="#" class="text-white"><i class="bi bi-person-circle"> </i></a>
 					</div>
+					<?php
+					}
+					?>
 				</div>
 			</div>
 		</div>
@@ -55,9 +68,25 @@
             <label for="pwd">Contraseña:</label>
             <input type="password" class="form-control" name="pasusu" placeholder="Enter password" id="pwd">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
     </form>
     </div>
-   
+   <?php
+		if(isset($_GET['e'])){
+			switch($_GET['e']){
+				case'1':
+					echo '<div class="container "><p>Error de conexion</p></div>';
+					break;
+				case'2':
+					echo '<div class="container "><p>Email de Invalido</p></div>';
+					break;
+				case'3':
+					echo '<div class="container "><p>Contraseña incorrecta</p></div>';
+					break;
+				default:
+					break;
+			}
+		}
+   ?>
 </body>
 </html>

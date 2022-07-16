@@ -1,3 +1,7 @@
+<?php
+ session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +25,46 @@
 	<link rel="stylesheet" href="css/styles.css">
 	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 
+	<header class="header">
+		<div class="container-fluid p-0">
+			<div class="row">
+				<div class="col-sm-3 text-left logo">
+					<a class="navbar-brand m-0" href="#"><img src="images/Logito.png" class="logito" alt=""></a>
+				</div>
+				<div class="col-sm-6 text-center align-self-center contacto">
+					<div class="mx-auto d-block contact-nav contact">
+						<a href="tel:+5101994191411" class="text-white"><i class="bi bi-telephone"> </i>01-994191411</a>
+						<div style="margin-top:10px ;margin-bottom: 8px;">
+							<a href="mailto:ventas@eselindustrial.com" class="text-white"><i class="bi bi-envelope">
+								</i>Correo para
+								ventas</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3 text-right align-self-center ingreso">
+					<?php
+					if (isset($_SESSION['codusu'])){
+					
+						echo '<a href="#" class="text-white"><i class="bi bi-person-circle"> </i>'.$_SESSION['nomusu'].'</a>';
+					}else{
+					?>
+					<div class="mx-auto d-block contact-nav contact">
+						<a href="#" class="text-white"><i class="bi bi-person-circle"> </i></a>
+					</div>
+					<?php
+					}
+					?>
+				</div>
+				<div class="col-md-2">
+		
+					<button class="btn btn-primary" type="button">
+					<a class="nav-link text-white siz letraNav" href="productos.php">Productos</a>
+					</button>
+				
+				</div>
+			</div>
+		</div>
+	</header>
 
     <div class="container p-5 mt-5" >
 		<div class="row d-flex align-items-center justify-content-around flex-column-md">

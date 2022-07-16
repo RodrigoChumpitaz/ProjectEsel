@@ -20,7 +20,7 @@ if($result){
             $_SESSION['codusu']=$row['codusu'];
             $_SESSION['emausu']=$row['emausu'];
             $_SESSION['nomusu']=$row['nomusu'];
-            header('Location: ../');
+            header('Location: ../productos.php');
         }
     }
     else{
