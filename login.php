@@ -76,10 +76,10 @@
 		if(isset($_GET['e'])){
 			switch($_GET['e']){
 				case'1':
-					echo '<div class="container "><p>Error de conexion</p></div>';
+					echo '<div class="container"><p>Error de conexion</p></div>';
 					break;
 				case'2':
-					echo '<div class="container "><p>Email de Invalido</p></div>';
+					echo '<div class="container"><p>Email Invalido</p></div>';
 					break;
 				case'3':
 					echo '<div class="container "><p>Contraseña incorrecta</p></div>';
