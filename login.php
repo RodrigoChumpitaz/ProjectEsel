@@ -69,7 +69,7 @@
             <input type="password" class="form-control" name="pasusu" placeholder="Enter password" id="pwd">
         </div>
         <button type="submit" class="btn btn-primary">Ingresar</button>
-		<a href="service/registrocli.php"> Crear Usuario</a>
+		<a href="registrocli.php"> Crear Usuario</a>
     </form>
     </div>
    <?php
