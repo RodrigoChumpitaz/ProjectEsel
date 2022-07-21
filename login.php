@@ -28,7 +28,7 @@
 		<div class="container-fluid p-0">
 			<div class="row">
 				<div class="col-sm-3 text-left logo">
-					<a class="navbar-brand m-0" href="#"><img src="images/Logito.png" class="logito" alt=""></a>
+					<a class="navbar-brand m-0" href="index.php"><img src="images/Logito.png" class="logito" alt=""></a>
 				</div>
 				<div class="col-sm-6 text-center align-self-center contacto">
 					<div class="mx-auto d-block contact-nav contact">
