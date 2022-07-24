@@ -1,26 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>ESEL INDUSTRIAL SAC</title>
-	<!-- CSS only -->
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-	<!-- jQuery library -->
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-	<!-- Popper JS -->
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <!--HEADER-->
+	<!--HEADER-->
 	<header class="header">
 		<div class="container-fluid p-0">
 			<div class="row">
@@ -39,14 +31,14 @@
 				</div>
 				<div class="col-sm-3 text-right align-self-center ingreso">
 					<?php
-					if (isset($_SESSION['codusu'])){
-					
-						echo '<a href="#" class="text-white"><i class="bi bi-person-circle"> </i>'.$_SESSION['nomusu'].'</a>';
-					}else{
+					if (isset($_SESSION['codusu'])) {
+
+						echo '<a href="#" class="text-white"><i class="bi bi-person-circle"> </i>' . $_SESSION['nomusu'] . '</a>';
+					} else {
 					?>
-					<div class="mx-auto d-block contact-nav contact">
-						<a href="#" class="text-white"><i class="bi bi-person-circle"> </i></a>
-					</div>
+						<div class="mx-auto d-block contact-nav contact">
+							<a href="#" class="text-white"><i class="bi bi-person-circle"> </i></a>
+						</div>
 					<?php
 					}
 					?>
@@ -55,31 +47,47 @@
 		</div>
 	</header>
 
-    <div class="container pt-5">
-    <form action="service/registrocli.php" method="POST">
-        <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" name="nomusu" placeholder="Ingrese su nombre" id="nombre">
-        </div>
-        <div class="form-group">
-            <label for="apellido">Apellido:</label>
-            <input type="text" class="form-control" name="apeusu" placeholder="Ingrese su apellido" id="apellido">
-        </div>
-        <div class="form-group">
-            <label for="email">Correo:</label>
-            <input type="email" class="form-control" name="emausu" placeholder="Ingrese su correo electronico" id="email">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Contraseña:</label>
-            <input type="password" class="form-control" name="pasusu" placeholder="Ingrese su contraseña" id="pwd">
-        </div>
-        <div class="form-group">
-            <label for="estado">Estado:</label>
-            <input type="text" class="form-control" name="estado" placeholder="Essss" id="est">
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
-    </div>
+	<div class="container pt-5">
+		<div class="col-12 col-sm-10 col-md-8  mx-auto">
+			<div class="card bg-light border-0 shadow">
+				<div class="card-body">
+					<form action="service/registrocli.php" method="POST">
+						<div class="form-group text-center">
+							<h3 class=" text-dark">Nombre</h3>
+							<input type="text" class="form-control" name="nomusu" placeholder="Ingrese su nombre" id="nombre">
+						</div>
+						<div class="form-group text-center">
+							<h3  class=" text-dark ">Apellido</h3>
+							<input type="text" class="form-control" name="apeusu" placeholder="Ingrese su apellido" id="apellido">
+						</div>
+						<div class="form-group text-center">
+							<h3 class=" text-dark ">Correo</h3>
+							<input type="email" class="form-control" name="emausu" placeholder="Ingrese su correo electronico" id="email">
+						</div>
+						<div class="form-group text-center">
+							<h3 class="text-dark">Contraseña</h3>
+							<input type="password" class="form-control" name="pasusu" placeholder="Ingrese su contraseña" id="pwd">
+						</div>
+						<div class="form-group text-center">
+							<h3  class=" text-dark ">Estado</h3>
+							<div class=" pr-md-5 mr-md-5">
+								<select name="estado" id="est" class="form-control">
+									<option value="1">Activo</option>
+									<option value="0">Inactivo</option>
+								</select>
+							</div>
+							<!-- <input type="text" class="form-control" name="estado" placeholder="Estado" id="est"> -->
+						</div>
+						<button type="submit" class="btn btn-info btn-lg btn-block">Guardar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>1
+
 </html>
