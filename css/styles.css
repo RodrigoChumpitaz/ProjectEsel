@@ -221,18 +221,20 @@ body{
     position: fixed;
     bottom: 10PX;
     right: 10PX;
-    border: 5px solid firebrick;
+    border: 2px solid rgb(29, 165, 29);
     border-radius: 30px;
     padding-right: 5px;
     font-weight: bolder;
     font-family: 'Poppins', sans-serif;
-    background-color: whitesmoke;
+    background-color: rgb(23, 22, 22);
+    color: white;
+    padding: 5px;
 }
 .nuevo-min{
     position: fixed;
     bottom: 10PX;
     right: 10PX;
-    border: 5px solid firebrick;
+    border: 3px solid rgb(29, 165, 29);
     border-radius: 30px;
     font-weight: bolder;
     font-family: 'Poppins', sans-serif;

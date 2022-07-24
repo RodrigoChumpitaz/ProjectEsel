@@ -32,9 +32,9 @@
 					let html='';
 					for(var i=0; i<data.datos.length; i++){
 						html+=
-						'<div class="col-md-3 py-5">'+
-							'<a href="venta_address.php?p='+data.datos[i].codpro+'">'+
-							'<div class="card" >'+
+						'<div class="col-10 col-md-3 py-5 mx-auto mx-md-0">'+
+							'<a href="venta_address.php?p='+data.datos[i].codpro+'" class="text-decoration-none text-dark btn btn-outline-secondary border-0 p-1">'+
+							'<div class="card border-0 shadow" >'+
 								'<img class="card-img-top img-fluid" src="images/productos/'+data.datos[i].rutimapro+'" >'+
 								'<div class="card-body">'+
 									'<h4 class="card-title">'+data.datos[i].nompro+'</h4>'+
@@ -42,6 +42,7 @@
 									'<p class="card-text">'+formato_precio(data.datos[i].prepro)+'</p>'+
 								'</div>'+
 							'</div>'+
+							'</a>'+
 						'</div>';
 					}
 					document.getElementById("space_lista").innerHTML=html;

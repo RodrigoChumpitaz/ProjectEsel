@@ -78,7 +78,7 @@
 							</div>
 							<!-- <input type="text" class="form-control" name="estado" placeholder="Estado" id="est"> -->
 						</div>
-						<button type="submit" class="btn btn-info btn-lg btn-block">Guardar</button>
+						<button type="submit" class="btn btn-info btn-lg ">Guardar</button>
 					</form>
 				</div>
 			</div>
