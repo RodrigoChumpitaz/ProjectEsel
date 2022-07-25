@@ -54,14 +54,22 @@
 					<?php
 					}
 					?>
+					 <div class="mx-auto d-block contact-nav contact mt-2 " >
+                            <a href="carrito.php"  style="font-size: 16px;"  class="text-white"><i class="bi bi-cart4"> </i>carrito</a>
+                    </div>
+                    <div class="mx-auto d-block contact-nav contact mt-2">
+                            <a href="pedido.php" style="font-size: 16px;" class="text-white"><i class="bi bi-basket"> </i>pedidos</a>
+                </div>	
 				</div>
 				<div class="col-md-2">
 		
-					<button class="btn btn-primary" type="button">
-					<a class="nav-link text-white siz letraNav" href="productos.php">Productos</a>
+				<button class="btn btn-form mb-3" type="button">
+					<a class="nav-link text-white siz letraNav" href="productos.php"><i class="bi bi-arrow-90deg-left"> </i>Productos</a>
 					</button>
 				
+				
 				</div>
+
 			</div>
 		</div>
 	</header>

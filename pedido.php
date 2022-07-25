@@ -58,76 +58,79 @@
 					<?php
 					}
 					?>
-                    <div class="mx-auto d-block contact-nav contact mt-2">
-                            <a href="pedido.php" style="font-size: 16px;" class="text-white"><i class="bi bi-basket"> </i>pedidos</a>
-                	</div>	
+					   <div class="mx-auto d-block contact-nav contact mt-2 " >
+                            <a href="carrito.php"  style="font-size: 16px;"  class="text-white"><i class="bi bi-cart4"> </i>carrito</a>
+                    </div>
 				</div>
 				<div class="col-md-2">
 		
-					<button class="btn btn-form mb-3" type="button">
+				<button class="btn btn-form mb-3" type="button">
 					<a class="nav-link text-white siz letraNav" href="productos.php"><i class="bi bi-arrow-90deg-left"> </i>Productos</a>
 					</button>
 				
 				</div>
-				
 			</div>
 		</div>
 	</header>
 
     <div class="container p-5" >
         <div class="container ">
-                    <div id="space_lista"></div>
-        </div>
-        <div class="form-group">
-        	<input type="text" id="dirusu" class="form-control" placeholder="Ingrese Direccion para el envio" >
-        </div>
-        <div class="form-group">
-        	<input type="text" id="telusu" class="form-control" placeholder="Ingrese su telefono o celular" >
+            <h3>Mis pedidos</h3>
+            <div id="space_lista"></div>
         </div>
 		<div class="form-group">
-			<div><b>Tipos de pago</b></div><br>
-        	<input type="radio"  class="" name="tipopago" value="1" id="tipo1"  >
-			<label for="tipo1">Pago por transferencia</label>
+			<label for="">Monto Total:</label>
+			<div id="montototal"></div>
         </div>
 		<div class="form-group">
-        	<input type="radio" class="" name="tipopago" value="2" id="tipo2"  >
-			<label for="tipo2">Pago por tarjeta de credito o debito</label>
+			<label for="">Banco: BCP</label>
+			<div></div>
         </div>
-        <button onclick="procesarcompra()" class="btn btn-primary" type="button">Comprar</button>
+        <div class="form-group">
+			<label for="">Numero de cuenta:9827372973213</label>
+			<div></div>
+        </div>
+		<div class="form-group">
+			<label for="">Representante:Jose Aguilar mamani</label>
+			<div></div>
+        </div>
+		<div class="form-group">
+			<b><div>Si en caso no compro con tarjeta de credito o debito: </b>
+				Para Concretar la venta comunicarse al wsp de la empresa <a href="">98989898</a> o al correo <a href="">ahshash@gmail.com</a></div>
+        </div>
+		
 	</div>
     
     <script type="text/javascript">
         $(document).ready(function(){
 			$.ajax({
-				url:'service/pedido/getPedidos.php',
+				url:'service/pedido/getProcesados.php',
 				type:'POST',
 				data:{},
 				success:function(data){
 					console.log(data);
 					let html='';
-					let sumamonto=0;
+					let monto=0;
 					for(var i=0; i<data.datos.length; i++){
 						html+=
                         '  <div class="media card-product " style="border-radius: 10px;">'+
                                 '<img src="images/productos/'+data.datos[i].rutimapro+'" class="mr-3 mt-3 " style="width:150px;">'+
                                 '<div class="text-white" style="font-size: 17px;">'+
                                     '<h4>'+data.datos[i].nompro+'</h4>'+
-                                    '<p>Precio:'+data.datos[i].prepro+'</p>'+
-                                    '<p>Fecha:'+data.datos[i].fecped+'</p>'+
-                                    '<p>Estado:'+data.datos[i].estado+'</p>'+
-                                    '<p>Direccion'+data.datos[i].dirusuped+'</p>'+
-                                    '<p>Celular'+data.datos[i].telusuped+'</p>'+
+                                    '<p>Precio: '+'S/.'+data.datos[i].prepro+'</p>'+
+                                    '<p>Fecha: '+data.datos[i].fecped+'</p>'+
+                                    '<p>Estado: '+data.datos[i].estadotext+'</p>'+
+                                    '<p>Direccion: '+data.datos[i].dirusuped+'</p>'+
+                                    '<p>Celular: '+data.datos[i].telusuped+'</p>'+
                                 '</div>'+
                             '</div>'+
                             '<br/>';
-							sumamonto+=parseInt(data.datos[i].prepro)+0;
+							if(data.datos[i].estado=="2"){
+								monto+=parseFloat(data.datos[i].prepro);
+							}
+						
 					}
-					Culqi.settings({
-						title: 'Culqi Store',
-						currency: 'PEN',
-						amount: sumamonto,
-					});
-					
+					document.getElementById("montototal").innerHTML=monto;
 					document.getElementById("space_lista").innerHTML=html;
 				},
 				error:function(err){
@@ -135,91 +138,6 @@
 				},
 			});
 		});
-        function procesarcompra(){
-            let dirusu=document.getElementById("dirusu").value;
-            let telusu=$("#telusu").val();
-			let tipopago=1;
-			
-			if(document.getElementById("tipo2").checked){
-				tipopago=2;
-			}
-
-            if(dirusu=="" || telusu==""){
-                alert("Complete los campos");
-            }else{
-				if(!document.getElementById("tipo1").checked && !document.getElementById("tipo2").checked ){
-					alert("Seleccione un metodo de pago")
-
-				}else{
-					if(tipopago==2){
-					Culqi.open();
-					}else{
-						
-						$.ajax({
-						url:'service/pedido/confirmar.php',
-						type:'POST',
-						data:{
-							dirusu:dirusu,
-							telusu:telusu,
-							tipopago:tipopago
-						},
-						success:function(data){
-							console.log(data);
-							if(data.state){
-								window.location.href="pedido.php"
-							}else{
-								alert(data.detail);
-							}
-						},
-						error:function(err){
-							console.log(err)
-						},	
-					});
-				}
-			}
-        }
-    }
-	function culqi() {
-		if (Culqi.token) {  // ¡Objeto Token creado exitosamente!
-		var token = Culqi.token.id;
-
-		$.ajax({
-				url:'service/pedido/confirmar.php',
-				type:'POST',
-				data:{
-					dirusu:document.getElementById("dirusu").value,
-					telusu:$("#telusu").val(),
-					tipopago:2,
-					token:token
-				},
-				success:function(data){
-				console.log(data);
-				if(data.state){
-					window.location.href="pedido.php"
-					}else{
-						alert(data.detail);
-					}
-				},
-				error:function(err){
-					console.log(err)
-				},	
-		});
-		} else if (Culqi.order) {  // ¡Objeto Order creado exitosamente!
-		const order = Culqi.order;
-		console.log(`Se ha creado el objeto Order: ${order}.`);
-		
-		} else {
-		// Mostramos JSON de objeto error en consola
-		console.log(`Error : ${Culqi.error.merchant_message}.`);
-		}
-	};
-		
 	</script>
     </body>
-	<script src="https://checkout.culqi.com/js/v4"></script>
-  <script>
-    Culqi.publicKey = 'tkn_live_0CjjdWhFpEAZlxlz';
-
-	
-  </script>
 </html>

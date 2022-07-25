@@ -34,18 +34,22 @@
                     <?php
                     if (isset($_SESSION['codusu'])) {
 
-                        echo '<a href="#" class="text-white"><i class="bi bi-person-circle"> </i>' . $_SESSION['nomusu'] . '</a>';
+                        echo '<a href="#" class="text-white mt-2"><i class="bi bi-person-circle"> </i>' . $_SESSION['nomusu'] . '</a>';
                     } else {
                     ?>
-                        <div class="mx-auto d-block contact-nav contact">
+                        <div class="mx-auto d-block contact-nav contact mt2">
                             <a href="login.php" class="text-white"><i class="bi bi-person-circle"> </i></a>
                         </div>
+
                     <?php
                     }
                     ?>
-                    <div class="mx-auto d-block contact-nav contact ">
-                            <a href="carrito.php" class="text-white"><i class="bi bi-cart4"> </i></a>
+                    <div class="mx-auto d-block contact-nav contact mt-2 " >
+                            <a href="carrito.php"  style="font-size: 16px;"  class="text-white"><i class="bi bi-cart4"> </i>carrito</a>
                     </div>
+                    <div class="mx-auto d-block contact-nav contact mt-2">
+                            <a href="pedido.php" style="font-size: 16px;" class="text-white"><i class="bi bi-basket"> </i>pedidos</a>
+                </div>	
                 </div>
             </div>
         </div>
