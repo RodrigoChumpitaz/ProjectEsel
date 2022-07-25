@@ -1,5 +1,8 @@
 <?php
  session_start();
+ if (!isset($_SESSION['codusu'])) {
+     header('location: index.php');
+ }
 
 ?>
 <!DOCTYPE html>
@@ -9,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
@@ -66,91 +70,79 @@
 		</div>
 	</header>
 
-    <div class="container p-5 mt-5" >
-		<div class="row d-flex align-items-center justify-content-around flex-column-md">
-            <div class="col-md-5 mb-3 mb-lg-0">
-                <img id="idimg" class="img-fluid shadow" src="images/productos/1.jpg" alt="">
-            </div>
-            <div class="col-md-6">
-				<div class="card my-lg-0 shadow my-sm-3" style="max-width: 100%;">
-					<div class="card-body text-center p-2 p-md-3 p-lg-4">
-						<img src="images/industria/industry_image.svg" class="img-fluid " alt="">
-						<div class="card-header text-center bg-white py-4"><img src="images/Logito.png" class="img-fluid" alt=""></div>
-						<h2 id="idtitle">NOMBRE PRINCIPAL</h2>
-						<h1 class="text-warning " id="idprice">S/. 35.<span>99</span></h1>
-						<p class="card-text" id="iddescription">Descripcion del producto</p>
-						<div class="d-flex align-items-center justify-content-center">
-							<button class="btn btn-secondary btn-lg"  onclick="iniciar_compra()" type="button">Comprar</button>
-						</div>
-					</div>
-				</div>
-            </div>
-		</div>
-	
+    <div class="container p-5" >
+        <div class="container ">
+                    <div id="space_lista"></div>
+        </div>
+        <div class="form-group">
+        <input type="email" id="dirusu" class="form-control" placeholder="Ingrese Direccion para el envio" id="email">
+        </div>
+        <div class="form-group">
+        <input type="email" id="telusu" class="form-control" placeholder="Ingrese su telefono o celular" id="email">
+        </div>
+        <button onclick="procesarcompra()" class="btn btn-primary" type="button">Comprar</button>
 	</div>
-   
-
+    
     <script type="text/javascript">
-		var p='<?php echo $_GET["p"]; ?>';
-	</script>
-
-<script type="text/javascript">
-		$(document).ready(function(){
+        $(document).ready(function(){
 			$.ajax({
-				url:'service/producto/getProductos.php',
+				url:'service/pedido/getPedidos.php',
 				type:'POST',
 				data:{},
 				success:function(data){
 					console.log(data);
 					let html='';
-					for (var i = 0; i < data.datos.length; i++) {
-						if (data.datos[i].codpro==p) {
-							document.getElementById("idimg").src="images/productos/"+data.datos[i].rutimapro;
-							document.getElementById("idtitle").innerHTML=data.datos[i].nompro;
-							document.getElementById("idprice").innerHTML=formato_precio(data.datos[i].prepro);
-							document.getElementById("iddescription").innerHTML=data.datos[i].despro;
-						}
+					for(var i=0; i<data.datos.length; i++){
+						html+=
+                        '  <div class="media card-product " style="border-radius: 10px;">'+
+                                '<img src="images/productos/'+data.datos[i].rutimapro+'" class="mr-3 mt-3 " style="width:150px;">'+
+                                '<div class="text-white" style="font-size: 17px;">'+
+                                    '<h4>'+data.datos[i].nompro+'</h4>'+
+                                    '<p>Precio:'+data.datos[i].prepro+'</p>'+
+                                    '<p>Fecha:'+data.datos[i].fecped+'</p>'+
+                                    '<p>Estado:'+data.datos[i].estado+'</p>'+
+                                    '<p>Direccion'+data.datos[i].dirusuped+'</p>'+
+                                    '<p>Celular'+data.datos[i].telusuped+'</p>'+
+                                '</div>'+
+                            '</div>'+
+                            '<br/>';
 					}
+					document.getElementById("space_lista").innerHTML=html;
 				},
 				error:function(err){
-					console.error(err);
-				}
+					console.log(err)
+				},
 			});
 		});
-		function formato_precio(valor){
-			//10.99
-			let svalor=valor.toString();
-			let array=svalor.split(".");
-			return "S/. "+array[0]+".<span>"+array[1]+"</span>";
-		}
-        function iniciar_compra(){
-            $.ajax({
-				url:'service/compras/validar_inicio_compra.php',
+        function procesarcompra(){
+            let dirusu=document.getElementById("dirusu").value;
+            let telusu=$("#telusu").val();
+
+            if(dirusu=="" || telusu==""){
+                alert("Complete los campos");
+            }else{
+                $.ajax({
+				url:'service/pedido/confirmar.php',
 				type:'POST',
 				data:{
-                    codpro:p
+                    dirusu:dirusu,
+                    telusu:telusu
                 },
 				success:function(data){
 					console.log(data);
                     if(data.state){
-                        alert(data.detail);
+                        window.location.href="pedido.php"
                     }else{
-                        alert(data.detail);
-                        if(data.open_login){
-                            open_login();
-                        }
-                        
-                    }
+						alert(data.detail);
+					}
 				},
 				error:function(err){
-					console.error(err);
-				}
+					console.log(err)
+				},
 			});
+
+            }
         }
-        function open_login(){
-            window.location.href="login.php"
-        }
-		
 		
 	</script>
     </body>

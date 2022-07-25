@@ -43,6 +43,9 @@
                     <?php
                     }
                     ?>
+                    <div class="mx-auto d-block contact-nav contact ">
+                            <a href="carrito.php" class="text-white"><i class="bi bi-cart4"> </i></a>
+                    </div>
                 </div>
             </div>
         </div>

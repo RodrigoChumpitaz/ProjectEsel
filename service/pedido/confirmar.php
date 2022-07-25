@@ -1,17 +1,12 @@
 <?php
 session_start();
 $response=new stdClass();
-if(!isset($_SESSION['codusu'])){
-    $response->state=false;
-    $response->detail="no esta logeado";
-    $response->open_login="true";
-}else{
+
     include_once('../conexion.php');
     $codusu=$_SESSION['codusu'];
-    $codpro=$_POST['codpro'];
-    $sql="INSERT INTO pedido 
-    (codusu,codpro,fecped,estado,dirusuped,telusuped)
-    VALUES ('$codusu','$codpro',now(),1,'','')";
+    $dirusu=$_POST['dirusu'];
+    $telusu=$_POST['telusu'];
+    $sql="UPDATE  pedido SET dirusuped='$dirusu', telusuped='$telusu' where estado=1 ";
 
     $result=mysqli_query($con,$sql);
     if($result){
@@ -20,12 +15,12 @@ if(!isset($_SESSION['codusu'])){
     }
     else{
         $response->state=false;
-        $response->detail="no se pudo agregar producto" ;
+        $response->detail="no se pudo actualizar el pedido" ;
     }
     // $response->state=true;
     // $response->detail="Esta logeado" ;
     mysqli_close($con);
-}
+
 
 
 

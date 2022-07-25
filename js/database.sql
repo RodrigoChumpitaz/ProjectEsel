@@ -32,3 +32,14 @@ CREATE TABLE USUARIO(
 
 INSERT INTO USUARIO (nomusu,apeusu,emausu,pasusu,estado)
 VALUES ('Adrian','Celis','correo@example.com','123456',1);
+
+create table PEDIDO(
+	codped int not null AUTO_INCREMENT,
+	codusu int not null,
+	codpro int not null,
+	fecped datetime not null,
+	estado int not null,
+	dirusuped varchar(50) not null,
+	telusuped varchar(12) not null,
+	PRIMARY KEY (codped)
+);
