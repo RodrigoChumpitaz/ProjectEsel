@@ -34,7 +34,16 @@
                     <?php
                     if (isset($_SESSION['codusu'])) {
 
-                        echo '<a href="#" class="text-white mt-2"><i class="bi bi-person-circle"> </i>' . $_SESSION['nomusu'] . '</a>';
+                        echo '
+                        <div class="dropdown">
+                        <button class="btn btn-dark mt-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"> </i>' . $_SESSION['nomusu'] . '
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                      </div>
+                        ';
                     } else {
                     ?>
                         <div class="mx-auto d-block contact-nav contact mt2">
@@ -44,16 +53,16 @@
                     <?php
                     }
                     ?>
-                    <div class="mx-auto d-block contact-nav contact mt-2 " >
-                            <a href="carrito.php"  style="font-size: 16px;"  class="text-white"><i class="bi bi-cart4"> </i>carrito</a>
+                    <div class="mx-auto d-block contact-nav contact mt-2 ">
+                        <a href="carrito.php" style="font-size: 16px;" class="text-white"><i class="bi bi-cart4"> </i>carrito</a>
                     </div>
                     <div class="mx-auto d-block contact-nav contact mt-2">
-                            <a href="pedido.php" style="font-size: 16px;" class="text-white"><i class="bi bi-basket"> </i>pedidos</a>
-                </div>	
+                        <a href="pedido.php" style="font-size: 16px;" class="text-white"><i class="bi bi-basket"> </i>pedidos</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </header> 
+    </header>
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-md navbar-dark nav py-0 my-0 ">
         <button class="navbar-toggler mb-3" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
