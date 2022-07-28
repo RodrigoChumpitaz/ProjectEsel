@@ -40,7 +40,7 @@
                         <i class="bi bi-person-circle"> </i>' . $_SESSION['nomusu'] . '
                         </button>
                         <div class="dropdown-menu">
-                          <a class="dropdown-item" href="#">Logout</a>
+                          <a class="dropdown-item" href="logout.php">Logout</a>
                         </div>
                       </div>
                         ';

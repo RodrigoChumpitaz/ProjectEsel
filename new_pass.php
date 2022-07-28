@@ -55,42 +55,17 @@ session_start();
 		<div class=" col-sm-8 col-lg-6 col-md-7  mx-auto">
 			<div class="card bg-dark text-white shadow">
 				<div class="card-body">
-					<form action="service/login.php" method="POST">
+					<form action="service/new_pass.php" method="POST">
 						<div class="form-group">
 							<label for="email">Correo:</label>
 							<input type="email" class="form-control" name="emausu" placeholder="Enter email" id="email">
 						</div>
-						<div class="form-group">
-							<label for="pwd">Contraseña:</label>
-							<input type="password" class="form-control" name="pasusu" placeholder="Enter password" id="pwd">
-						</div>
-						<button type="submit" class="btn btn-primary my-3">Ingresar</button>
-						<a href="registrocli.php" class="btn btn-outline-info -"> Crear Usuario</a>
-						<a href="new_pass.php" class="">¿Desea Recordar su contraseña?</a>
+						<button type="submit" class="btn btn-primary my-3">Enviar Nueva Contraseña al correo</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<?php
-	if (isset($_GET['e'])) {
-		switch ($_GET['e']) {
-			case '1':
-				echo '<div class="container"><p>Error de conexion</p></div>';
-				break;
-			case '2':
-				echo '<div class="container"><p>Email Invalido</p></div>';
-				break;
-			case '3':
-				echo '<div class="container "><p>Contraseña incorrecta</p></div>';
-				break;
-			default:
-				break;
-		}
-	}
-	?>
-
-	<?php
 
 
 	?>
