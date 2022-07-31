@@ -76,7 +76,7 @@
 
     <div class="container p-5" >
         <div class="container ">
-                    <div id="space_lista"></div>
+            <div id="space_lista"></div>
         </div>
         <div class="form-group">
         	<input type="text" id="dirusu" class="form-control" placeholder="Ingrese Direccion para el envio" >

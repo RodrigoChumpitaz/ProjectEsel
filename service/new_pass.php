@@ -18,9 +18,18 @@ if(isset($_POST['emausu']) && !empty($_POST['emausu'])){
     $message="El sistema le asigno la siguiente clave ".$pasusu;
 
     mail($to,$subject,$message,$from);
-    echo 'Correo enviado satisafactoriamente a'. $_POST['emausu'];
+    
+    echo'<script type="text/javascript">
+    alert("Correo enviado satisafactoriamente, Revise su correo porfavor");
+    window.location.href="../login.php";
+    </script>';
+
 
 }
 else{
-    echo 'Informacion Incompleta';
+  echo'<script type="text/javascript">
+  alert("Informacion Incompleta, Complete los campos");
+  window.location.href="../login.php";
+  </script>';
+
 }

@@ -74,32 +74,37 @@
 	</header>
 
     <div class="container p-5" >
-        <div class="container ">
-            <h3>Mis pedidos</h3>
-            <div id="space_lista"></div>
-        </div>
-		<div class="form-group">
-			<label for="">Monto Total:</label>
-			<div id="montototal"></div>
-        </div>
-		<div class="form-group">
-			<label for="">Banco: BCP</label>
-			<div></div>
-        </div>
-        <div class="form-group">
-			<label for="">Numero de cuenta:9827372973213</label>
-			<div></div>
-        </div>
-		<div class="form-group">
-			<label for="">Representante:Jose Aguilar mamani</label>
-			<div></div>
-        </div>
-		<div class="form-group">
-			<b><div>Si en caso no compro con tarjeta de credito o debito: </b>
-				Para Concretar la venta comunicarse al wsp de la empresa <a href="">98989898</a> o al correo <a href="">ahshash@gmail.com</a></div>
-        </div>
+		<div class="row" >
+			<div class="col-md-8 " >
+				<h3>Mis pedidos</h3>
+				<div id="space_lista"></div>
+			</div>
+			<div class="col-md-4 card card-body " style="border-radius: 10px;box-shadow: 10px 3px 10px  gray;" >
+				<div class="form-group">
+					<label for="">Monto Total:</label>
+					<div id="montototal"></div>
+				</div>
+				<div class="form-group">
+					<label for="">Banco: BCP</label>
+					<div></div>
+				</div>
+				<div class="form-group">
+					<label for="">Numero de cuenta:9827372973213</label>
+					<div></div>
+				</div>
+				<div class="form-group">
+					<label for="">Representante:Jose Aguilar mamani</label>
+					<div></div>
+				</div>
+				<div class="form-group card minicard" >
+					<b><div>Si en caso no compro con tarjeta de credito o debito: </b>
+						Para Concretar la venta comunicarse al wsp de la empresa <a href="" style="color: white;">98989898</a> o al correo <a href="" style="color: white;">Esel@gmail.com</a>
+				</div>
+			</div>
+		</div>
+    </div>
 		
-	</div>
+
     
     <script type="text/javascript">
         $(document).ready(function(){
@@ -113,10 +118,11 @@
 					let monto=0;
 					for(var i=0; i<data.datos.length; i++){
 						html+=
-                        '  <div class="media card-product " style="border-radius: 10px;">'+
+                        '  <div class="media card-product " style="border-radius: 10px; ">'+
                                 '<img src="images/productos/'+data.datos[i].rutimapro+'" class="mr-3 mt-3 " style="width:150px;">'+
                                 '<div class="text-white" style="font-size: 17px;">'+
                                     '<h4>'+data.datos[i].nompro+'</h4>'+
+									'<p>codigo: '+data.datos[i].codped+'</p>'+
                                     '<p>Precio: '+'S/.'+data.datos[i].prepro+'</p>'+
                                     '<p>Fecha: '+data.datos[i].fecped+'</p>'+
                                     '<p>Estado: '+data.datos[i].estadotext+'</p>'+
