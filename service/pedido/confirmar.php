@@ -7,6 +7,7 @@ $response=new stdClass();
     $dirusu=$_POST['dirusu'];
     $telusu=$_POST['telusu'];
     $tipopago=$_POST['tipopago'];
+    $cantidad=$_POST['cantidad'];
     
     if($tipopago==1){
         $estado=2;
@@ -14,7 +15,7 @@ $response=new stdClass();
         $estado=3;
     }
 
-    $sql="UPDATE  pedido SET dirusuped='$dirusu', telusuped='$telusu',estado=$estado where estado=1 ";
+    $sql="UPDATE  pedido SET dirusuped='$dirusu', telusuped='$telusu',cantidadp='$cantidad',estado=$estado where estado=1 ";
 
     $result=mysqli_query($con,$sql);
     if($result){

@@ -32,6 +32,7 @@ while($row=mysqli_fetch_array($result)){
     $obj->fecped=$row['fecped'];
     $obj->dirusuped=utf8_encode($row['dirusuped']) ;
     $obj->telusuped=$row['telusuped'];
+    $obj->cantidad=$row['cantidad'];
     $obj->estado=estado2texto($row['estadoped']);
     $datos[$i]=$obj;
     $i++;

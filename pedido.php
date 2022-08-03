@@ -126,13 +126,14 @@
                                     '<p>Precio: '+'S/.'+data.datos[i].prepro+'</p>'+
                                     '<p>Fecha: '+data.datos[i].fecped+'</p>'+
                                     '<p>Estado: '+data.datos[i].estadotext+'</p>'+
+									'<p>Cantidad: '+data.datos[i].cantidadp+'</p>'+
                                     '<p>Direccion: '+data.datos[i].dirusuped+'</p>'+
                                     '<p>Celular: '+data.datos[i].telusuped+'</p>'+
                                 '</div>'+
                             '</div>'+
                             '<br/>';
-							if(data.datos[i].estado=="2"){
-								monto+=parseFloat(data.datos[i].prepro);
+							if(data.datos[i].estado=="2" || data.datos[i].estado=="3"){
+								monto+=parseFloat(data.datos[i].prepro*data.datos[i].cantidadp);
 							}
 						
 					}

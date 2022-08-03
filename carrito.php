@@ -85,6 +85,9 @@
         	<input type="text" id="telusu" class="form-control" placeholder="Ingrese su telefono o celular" >
         </div>
 		<div class="form-group">
+        	<input type="number" id="cantidad" class="form-control" placeholder="Ingrese la cantidad" >
+        </div>
+		<div class="form-group">
 			<div><b>Tipos de pago</b></div><br>
         	<input type="radio"  class="" name="tipopago" value="1" id="tipo1"  >
 			<label for="tipo1">Pago por transferencia</label>
@@ -139,6 +142,7 @@
             let dirusu=document.getElementById("dirusu").value;
             let telusu=$("#telusu").val();
 			let tipopago=1;
+			let cantidad=$("#cantidad").val();
 			
 			if(document.getElementById("tipo2").checked){
 				tipopago=2;
@@ -161,7 +165,8 @@
 						data:{
 							dirusu:dirusu,
 							telusu:telusu,
-							tipopago:tipopago
+							tipopago:tipopago,
+							cantidad:cantidad
 						},
 						success:function(data){
 							console.log(data);
@@ -189,6 +194,7 @@
 					dirusu:document.getElementById("dirusu").value,
 					telusu:$("#telusu").val(),
 					tipopago:2,
+					cantidad:$("#cantidad").val(),
 					token:token
 				},
 				success:function(data){

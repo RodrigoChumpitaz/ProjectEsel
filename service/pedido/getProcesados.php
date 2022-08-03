@@ -42,6 +42,7 @@ while($row=mysqli_fetch_array($result)){
     $obj->dirusuped=utf8_encode($row['dirusuped']) ;
     $obj->telusuped=$row['telusuped'];
     $obj->estado=$row['estadoped'];
+    $obj->cantidadp=$row['cantidadp'];
     $obj->estadotext=estado2texto($row['estadoped']);
     
     $datos[$i]=$obj;
