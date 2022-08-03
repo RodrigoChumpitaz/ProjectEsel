@@ -120,7 +120,7 @@
                                 '</div>'+
                             '</div>'+
                             '<br/>';
-							sumamonto+=parseInt(data.datos[i].prepro)+0;
+							sumamonto+=parseInt(data.datos[i].prepro)+1;
 					}
 					Culqi.settings({
 						title: 'Culqi Store',
@@ -182,7 +182,6 @@
 	function culqi() {
 		if (Culqi.token) {  // ¡Objeto Token creado exitosamente!
 		var token = Culqi.token.id;
-
 		$.ajax({
 				url:'service/pedido/confirmar.php',
 				type:'POST',
@@ -215,11 +214,9 @@
 	};
 		
 	</script>
-    </body>
 	<script src="https://checkout.culqi.com/js/v4"></script>
-  <script>
-    Culqi.publicKey = 'tkn_live_0CjjdWhFpEAZlxlz';
-
-	
-  </script>
+  	<script>
+    Culqi.publicKey = 'pk_test_3adf22bd8acf4efc';
+  	</script>
+</body>
 </html>

@@ -12,7 +12,7 @@ function estado2texto($id){
             return 'Por pagar';
             break;
         case '3':
-            return 'Por entregar';
+            return 'Por entregar/Pagado';
             break;
         case '4':
             return 'En camino';
