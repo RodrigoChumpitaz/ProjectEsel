@@ -53,11 +53,13 @@
                     <?php
                     }
                     ?>
-                    <div class="mx-auto d-block contact-nav contact mt-2 ">
-                        <a href="carrito.php" style="font-size: 16px;" class="text-white"><i class="bi bi-cart4"> </i>carrito</a>
+                    <div class="mx-auto d-block contact-nav contact mt-2 " >
+                            <a href="carrito_vista.php"  style="font-size: 16px;"  class="text-white">carrito
+							<i class="bi bi-cart4"> </i><span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
+							</a>
                     </div>
                     <div class="mx-auto d-block contact-nav contact mt-2">
-                        <a href="pedido.php" style="font-size: 16px;" class="text-white"><i class="bi bi-basket"> </i>pedidos</a>
+                        <a href="pago.php" style="font-size: 16px;" class="text-white"><i class="bi bi-basket"> </i>pedidos</a>
                     </div>
                 </div>
             </div>
@@ -86,3 +88,25 @@
             </ul>
         </div>
     </nav>
+
+    <script>
+		function addProduct(codpro,token){
+			let url='/carrito.php'
+			let formData=new FormData()
+			formData.append('codpro',codpro)
+			formData.append('token',token)
+
+			fetch(url,{
+				method:'POST',
+				body:formData,
+				mode:'cors'
+			}).then ( response => response.json())
+			.then(data=>{
+				if(data.ok){
+					let elemento =document.getElementById("num_cart")
+					elemento.innerHTML=data.numero
+				}
+			})
+
+		}
+	</script>

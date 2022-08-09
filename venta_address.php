@@ -1,7 +1,44 @@
 <?php
- session_start();
+//  session_start();
 
 ?>
+
+<?php
+require'./service/cifrado.php';
+require './service/database.php';
+$db=new Database();
+$con=$db->conectar();
+
+$cod=isset($_GET['codpro']) ? $_GET['codpro'] : '';
+$token=isset( $_GET['token']) ? $_GET['token'] : '';
+
+if($cod=='' || $token== ''){
+	echo 'Error al procesar la peticion';
+	exit;
+}else{
+	$token_tmp=hash_hmac('sha1',$cod,KEY_TOKEN);
+
+	if($token==$token_tmp){
+		$sql=$con->prepare("SELECT count(codpro) FROM producto WHERE codpro=? AND estado=1");
+		$sql->execute([$cod]);
+		if($sql->fetchColumn() > 0){
+			$sql=$con->prepare("SELECT codpro,nompro,prepro,despro,rutimapro FROM producto WHERE codpro=? AND estado=1 LIMIT 1");
+			$sql->execute([$cod]);
+			$row=$sql->fetch(PDO::FETCH_ASSOC);
+			$nombre=$row['nompro'];
+			$descripcion=$row['despro'];
+			$img=$row['rutimapro'];
+			$precio=$row['prepro'];
+		}
+	
+	}else{
+		echo 'Error al procesar la peticion';
+	exit;
+	}
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +92,9 @@
 					}
 					?>
 					 <div class="mx-auto d-block contact-nav contact mt-2 " >
-                            <a href="carrito.php"  style="font-size: 16px;"  class="text-white"><i class="bi bi-cart4"> </i>carrito</a>
+                            <a href="carrito_vista.php"  style="font-size: 16px;"  class="text-white">carrito
+							<span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
+							</a>
                     </div>
                     <div class="mx-auto d-block contact-nav contact mt-2">
                             <a href="pedido.php" style="font-size: 16px;" class="text-white"><i class="bi bi-basket"> </i>pedidos</a>
@@ -74,70 +113,71 @@
 		</div>
 	</header>
 
-    <div class="container p-5 mt-5" >
-		<div class="row d-flex align-items-center justify-content-around flex-column-md">
-            <div class="col-md-5 mb-3 mb-lg-0">
-                <img id="idimg" class="img-fluid shadow" src="images/productos/1.jpg" alt="">
-            </div>
-            <div class="col-md-6">
-				<div class="card my-lg-0 shadow my-sm-3" style="max-width: 100%;">
-					<div class="card-body text-center p-2 p-md-3 p-lg-4">
-						<img src="images/industria/industry_image.svg" class="img-fluid " alt="">
-						<div class="card-header text-center bg-white py-4"><img src="images/Logito.png" class="img-fluid" alt=""></div>
-						<h2 id="idtitle">NOMBRE PRINCIPAL</h2>
-						<h1 class="text-warning " id="idprice">S/. 35.<span>99</span></h1>
-						<p class="card-text" id="iddescription">Descripcion del producto</p>
-						<div class="d-flex align-items-center justify-content-center">
-							<button class="btn btn-secondary btn-lg"  onclick="iniciar_compra()" type="button">Comprar</button>
-						</div>
-					</div>
-				</div>
-            </div>
-		</div>
-	
-	</div>
-   
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 order-md-1 pt-3">
+				<?php 
+					$ruta="/images/productos/$img";
 
-    <script type="text/javascript">
-		var p='<?php echo $_GET["p"]; ?>';
-	</script>
-
-<script type="text/javascript">
-		$(document).ready(function(){
-			$.ajax({
-				url:'service/producto/getProductos.php',
-				type:'POST',
-				data:{},
-				success:function(data){
-					console.log(data);
-					let html='';
-					for (var i = 0; i < data.datos.length; i++) {
-						if (data.datos[i].codpro==p) {
-							document.getElementById("idimg").src="images/productos/"+data.datos[i].rutimapro;
-							document.getElementById("idtitle").innerHTML=data.datos[i].nompro;
-							document.getElementById("idprice").innerHTML=formato_precio(data.datos[i].prepro);
-							document.getElementById("iddescription").innerHTML=data.datos[i].despro;
+						if(!!file_exists($ruta)){
+							$img="/images/productos/No-carga.jpg";
 						}
-					}
-				},
-				error:function(err){
-					console.error(err);
-				}
-			});
-		});
-		function formato_precio(valor){
-			//10.99
-			let svalor=valor.toString();
-			let array=svalor.split(".");
-			return "S/. "+array[0]+".<span>"+array[1]+"</span>";
+					?>
+					<img src="<?php echo $ruta; ?>" alt="" class="img-fluid" style="height: 530px;"> 
+				</div>
+				<div class="col-md-6 order-md-2 pt-3">
+					<h2><?php echo $nombre ?></h2>
+					<h2><?php echo MONEDA . number_format( $precio,2,'.',',')?></h2>
+					<p class="lead">
+						<?php echo $descripcion ?>
+					</p>
+					<div class="d-grid gap3 col10 mx-auto">
+						<button type="button" class="btn btn-primary">Comprar ahora</button>
+						<button type="button" class="btn btn-success" onclick="todos()">Agregar al carrito </button>
+					</div> 
+				</div>
+			</div>
+			
+		</div>
+	</main>
+
+	<!-- <script type="text/javascript">
+		var p='<php echo $_GET["codpro"]; ?>';
+	</script> -->
+
+	<script>
+		function todos(){
+			 iniciar_compra();
+			 addProduct(<?php echo $cod;?>,'<?php echo $token_tmp; ?>');
+			
 		}
-        function iniciar_compra(){
+
+		function addProduct(codpro,token){
+			let url='/carrito.php'
+			let formData=new FormData()
+			formData.append('codpro',codpro)
+			formData.append('token',token)
+
+			fetch(url,{
+				method:'POST',
+				body:formData,
+				mode:'cors'
+			}).then ( response => response.json())
+			.then(data=>{
+				if(data.ok){
+					let elemento =document.getElementById("num_cart")
+					elemento.innerHTML=data.numero
+				}
+			})
+
+		}
+
+	function iniciar_compra(){
             $.ajax({
 				url:'service/compras/validar_inicio_compra.php',
 				type:'POST',
-				data:{
-                    codpro:p
-                },
+				
 				success:function(data){
 					console.log(data);
                     if(data.state){
@@ -158,8 +198,8 @@
         function open_login(){
             window.location.href="login.php"
         }
-		
-		
 	</script>
+
+    
     </body>
 </html>
