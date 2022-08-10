@@ -1,4 +1,3 @@
-
 <?php
 require './service/cifrado.php';
 require './service/database.php';
@@ -23,6 +22,12 @@ $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+
+   
 
 </head>
 
@@ -107,21 +112,15 @@ $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 	<!-- ----------------------------------------------------------------------------------------------------------- -->
 	<!-- PRODUCTOS -->
 
-	<!-- <div class="container" >
-		<div class="row" id="space_lista">
-
-		</div>
-	</div> -->
-
 
 	<main>
-	<div class="container">
+	<div class="container ">
 
-		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pt-5 pb-5">
+		<div class="row pt-5 pb-5">
 		<?php foreach ($resultado as $row) { ?>
 
-			<div class="col">
-				<div class="card shadow-sm">
+			<div class="col-md-3">
+				<div class="card " >
 					<?php 
 					$rutima=$row['rutimapro'];
 					$img="/images/productos/$rutima";
@@ -130,8 +129,8 @@ $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 							$img="/images/productos/No-carga.jpg";
 						}
 					?>
-					<img src="<?php echo $img; ?>" alt="" style="height: 370px;">
-					<div class="card-body">
+					<img src="<?php echo $img; ?>" alt="" style="height: 350px;width: ;">
+					<div class="card-body" >
 						<h5 class="card-title"><?php echo $row['nompro']; ?></h5>
 						<p class="card-text">$<?php echo number_format( $row['prepro'],2,'.',','); ?></p>
 						<div class="d-flex justify-content-between align-items-center">
@@ -139,19 +138,51 @@ $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 						<div class="btn-group">
 							<a href="venta_address.php?codpro=<?php echo $row['codpro'];?>&token=<?php echo 
 							hash_hmac('sha1',$row['codpro'],KEY_TOKEN ); ?>" class="btn btn-primary">Detalles</a>
-						</div>
-							<button type="button" class="btn btn-success" onclick="addProduct(
-								<?php echo $row['codpro']; ?>,'<?php echo hash_hmac('sha1',$row['codpro'],KEY_TOKEN ); ?>')">Agregar al carrito </button>
+                        
+						</div>  
+                        <?php
+                        $response=new stdClass();
+                        if(!isset($_SESSION['codusu'])){
+                            $response->state=false;
 
+                            echo '<button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal" >Agregar al <i class="bi bi-cart4"></i></button>';
+                        }else{   ?>
+							<button type="button" class="btn btn-success"  onclick="addProduct(
+								<?php echo $row['codpro']; ?>,'<?php echo hash_hmac('sha1',$row['codpro'],KEY_TOKEN ); ?>')">Agregar al <i class="bi bi-cart4"> </i> </button>
+                        <?php
+                            }
+                            ?>
 						</div>
+                        
 					</div>
+                   
 				</div>
 			</div>
 			<?php } ?>
 		</div>
 	</main>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Debe iniciar sesion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Para Agregar Productos debe iniciar sesion
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+        <a href="login.php"> <button type="button"  class="btn btn-success">Ir a iniciar sesion</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 	<script>
+
 		function addProduct(codpro,token){
 			let url='/carrito.php'
 			let formData=new FormData()
@@ -171,6 +202,9 @@ $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
 			})
 
 		}
+       
+
+       
 	</script>
 
 

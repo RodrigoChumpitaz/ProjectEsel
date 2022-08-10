@@ -103,7 +103,7 @@ if($cod=='' || $token== ''){
 				<div class="col-md-2">
 		
 				<button class="btn btn-form mb-3" type="button">
-					<a class="nav-link text-white siz letraNav" href="productos.php"><i class="bi bi-arrow-90deg-left"> </i>Productos</a>
+					<a class="nav-link text-white  letraNav" href="productos.php"><i class="bi bi-arrow-90deg-left"> </i></a>
 					</button>
 				
 				
@@ -142,9 +142,6 @@ if($cod=='' || $token== ''){
 		</div>
 	</main>
 
-	<!-- <script type="text/javascript">
-		var p='<php echo $_GET["codpro"]; ?>';
-	</script> -->
 
 	<script>
 		function todos(){
