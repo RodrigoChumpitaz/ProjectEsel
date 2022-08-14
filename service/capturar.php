@@ -22,7 +22,7 @@ if(is_array($datos)){
 
     $sql=$con->prepare("INSERT INTO pedido (id_transaccion,codusu,id_cliente,fecped,estado,dirusuped,telusuped,total) VALUES (
         ?,?,?,?,?,?,?,?)");
-    $sql->execute([$id_transaccion,$codusu,$idcliente ,$fecha_registrar, $status,'','',$total]);
+    $sql->execute([$id_transaccion,$codusu,$idcliente ,$fecha_registrar, $status,'av.Las Rosas San Juan','987654321',$total]);
     $cod=$con->lastInsertId();
 
     if($cod >0){
@@ -46,6 +46,7 @@ if(is_array($datos)){
             
                
             }
+      
         }
         unset($_SESSION['carrito']);
     }

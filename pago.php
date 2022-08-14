@@ -18,12 +18,13 @@ if($productos!=null){
         codpro=? AND estado=1");
         $sql->execute([$clave]);
         $lista_carrito[]=$sql->fetch(PDO::FETCH_ASSOC);
+
+
     }
 }else{
     header("Location:productos.php");
     exit;
 }
-
 // print_r($_SESSION);
 
 
@@ -132,7 +133,8 @@ if($productos!=null){
             </ul>
         </div>
     </nav>
-
+    
+   
 	<!-- ----------------------------------------------------------------------------------------------------------- -->
 	<!-- PRODUCTOS -->
 
@@ -183,7 +185,7 @@ if($productos!=null){
                                 </tr>
 
                             </tbody>
-                            <?php } ?>
+                            <?php }  ?>
                         </table>
                     </div>
                 </div>
@@ -197,6 +199,7 @@ if($productos!=null){
         </div>
     </div>
 	</main>
+   
 
 
     <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID;?>&currency=<?php echo CURRENCY;?>"> 
@@ -231,11 +234,17 @@ if($productos!=null){
                         },
                         body:JSON.stringify({
                             detalles:detalles
+                            
                         })
+                        
                     } )
+                    .then(function(response){
+                        window.location.href="./service/comprobante.php"
+                    })
+                    
 
                    
-                });
+                }) ;
             },
 
             onCancel:function(data){
